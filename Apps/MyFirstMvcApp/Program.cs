@@ -12,26 +12,33 @@ namespace MyFirstMvcApp
     {
         static async Task Main(string[] args)
         {
-            var server = new HttpServer();
+            IHttpServer server = new HttpServer();
 
             server.AddRoute("/", HomePage);
+            server.AddRoute("/favicon.ico", Favicon);
             server.AddRoute("/about", About);
             server.AddRoute("/user/login", LogIn);
-
-            server.Start(80);
+            await server.StartAsync(80);
         }
 
         static HttpResponse HomePage(HttpRequest request)
         {
-            
+            throw new NotImplementedException();
         }
+
+        private static HttpResponse Favicon(HttpRequest arg)
+        {
+            throw new NotImplementedException();
+        }
+
         static HttpResponse About(HttpRequest request)
         {
-
+            throw new NotImplementedException();
         }
+
         static HttpResponse LogIn(HttpRequest request)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
