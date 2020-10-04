@@ -1,7 +1,15 @@
-﻿namespace SUS.HTTP
+﻿using System.Net;
+
+namespace SUS.HTTP
 {
     public class Cookie
     {
+        public Cookie(string name, string value)
+        {
+            this.Name = name;
+            this.Value = value;
+        }
+
         private string cookiesAsString;
 
         public Cookie(string cookiesAsString)
