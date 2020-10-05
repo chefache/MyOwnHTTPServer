@@ -9,4 +9,10 @@
     <ProjectReference Include="..\..\SUS.HTTP\SUS.HTTP.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="wwwroot\vb-net-icon-1.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
