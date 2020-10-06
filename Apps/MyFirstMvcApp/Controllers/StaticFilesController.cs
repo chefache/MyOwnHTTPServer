@@ -11,9 +11,7 @@ namespace MyFirstMvcApp.Controllers
     {
         public HttpResponse Favicon(HttpRequest arg)
         {
-            var fileBites = File.ReadAllBytes("wwwroot/vb-net-icon-1.ico");
-            var response = new HttpResponse("image/vnd.microsoft.icon", fileBites);
-            return response;
+            return this.File("wwwroot/vb-net-icon-1.ico", "image/vnd.microsoft.icon");
         }
     }
 }
