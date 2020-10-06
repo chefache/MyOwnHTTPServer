@@ -1,4 +1,5 @@
-﻿using SUS.HTTP;
+﻿using MyFirstMvcApp.Controllers;
+using SUS.HTTP;
 using System;
 using System.IO;
 using System.Linq;
@@ -14,46 +15,13 @@ namespace MyFirstMvcApp
         {
             IHttpServer server = new HttpServer();
 
-            server.AddRoute("/", HomePage);
-            server.AddRoute("/favicon.ico", Favicon);
-            server.AddRoute("/about", About);
-            server.AddRoute("/user/login", LogIn);
+            server.AddRoute("/", new HomeController().Index);
+            server.AddRoute("/favicon.ico", new StaticFilesController().Favicon);
+            server.AddRoute("/about", new HomeController().About);
+            server.AddRoute("/user/login", new UsersController().LogIn);
+            server.AddRoute("/user/register", new UsersController().Register);
+
             await server.StartAsync(80);
-        }
-
-        static HttpResponse HomePage(HttpRequest request)
-        {
-            var responseHtml = "<h1>Welcome!</h1>" +
-                        request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-            return response;
-        }
-
-        private static HttpResponse Favicon(HttpRequest arg)
-        {
-            var fileBites = File.ReadAllBytes("wwwroot/vb-net-icon-1.ico");
-            var response = new HttpResponse("image/vnd.microsoft.icon", fileBites);
-            return response;
-        }
-
-        static HttpResponse About(HttpRequest request)
-        {
-
-            var responseHtml = "<h1>About...</h1>" +
-                        request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-            return response;
-        }
-
-        static HttpResponse LogIn(HttpRequest request)
-        {
-            var responseHtml = "<h1>Log in...</h1>" +
-                        request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-            return response;
-        }
+        }   
     }
 }
